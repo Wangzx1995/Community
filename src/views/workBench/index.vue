@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="position:relative">
         <el-row :gutter="20">
             <el-col :span="16">
                 <div class="grid-content">
@@ -76,23 +76,43 @@
             </el-input>
         </div>
         <div class="table">
-            <mainTable />
+            <mainTable @my-move="changeShow" />
         </div>
+        <transition name="slide-fade">
+            <div
+                class="move"
+                v-if="show"
+            >
+                <div class="btn">
+                    <el-button
+                        type="primary"
+                        @click="show = !show"
+                    ><i class="el-icon-arrow-right"></i></el-button>
+                </div>
+                <move />
+            </div>
+        </transition>
     </div>
 </template>
 
 <script>
 import mainTable from "./table.vue";
+import move from "./move.vue";
 
 export default {
     data() {
         return {
-
+            show: true
         }
     },
     components: {
-        mainTable
+        mainTable, move
     },
+    methods: {
+        changeShow() {
+            this.show = !this.show
+        }
+    }
 }
 </script>
 
@@ -146,6 +166,38 @@ export default {
     .el-input {
         width: 400px;
         float: right;
+    }
+}
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+    transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+    transform: translateX(3000px);
+}
+.move {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100;
+    background: #ffffff;
+    min-height: 500px;
+    overflow: hidden;
+    padding-left: 30px;
+    .btn {
+        position: absolute;
+        left: 0px;
+        top: 50%;
+        margin-top: -108px;
+        .el-button {
+            padding: 100px 5px;
+            margin: auto 0;
+            vertical-align: middle;
+        }
     }
 }
 </style>

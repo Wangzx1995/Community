@@ -59,16 +59,28 @@
             </el-row>
             <el-row>
                 <el-col :span="6">
-                    <div class="bottom">1单元</div>
+                    <div
+                        class="bottom"
+                        @click="move"
+                    >1单元</div>
                 </el-col>
                 <el-col :span="6">
-                    <div class="bottom">2单元</div>
+                    <div
+                        class="bottom"
+                        @click="move"
+                    >2单元</div>
                 </el-col>
                 <el-col :span="6">
-                    <div class="bottom">3单元</div>
+                    <div
+                        class="bottom"
+                        @click="move"
+                    >3单元</div>
                 </el-col>
                 <el-col :span="6">
-                    <div class="bottom">4单元</div>
+                    <div
+                        class="bottom"
+                        @click="move"
+                    >4单元</div>
                 </el-col>
             </el-row>
         </div>
@@ -293,7 +305,6 @@
                 </div>
             </el-dialog>
         </div>
-
     </div>
 </template>
 
@@ -358,6 +369,9 @@ export default {
         },
         choosePianqu(index) {
             this.pianquLi[index].selected = !this.pianquLi[index].selected;
+        },
+        move() {
+            this.$emit('my-move', '')
         }
     }
 }
